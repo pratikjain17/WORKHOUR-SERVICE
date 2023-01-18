@@ -3,34 +3,40 @@ package com.pratik.www.employeeleave.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 
 import java.util.Collections;
 
 @Configuration
+@PropertySource("classpath:application.properties")
 public class Config extends AbstractCouchbaseConfiguration {
 
+//    @Autowired
+//    private ApplicationContext context;
+
     @Autowired
-    private ApplicationContext context;
+    Environment env;
 
     @Override
     public String getConnectionString() {
-        return "couchbase://127.0.0.1";
+        return env.getProperty("app.db.bootstrap-hosts");
     }
 
     @Override
     public String getUserName() {
-        return "Pratik";
+        return env.getProperty("app.db.username");
     }
 
     @Override
     public String getPassword() {
-        return "pratik";
+        return env.getProperty("app.db.password");
     }
 
     @Override
     public String getBucketName() {
-        return "employeeleave";
+        return env.getProperty("app.db.bucketName");
     }
 
 //    @Override
