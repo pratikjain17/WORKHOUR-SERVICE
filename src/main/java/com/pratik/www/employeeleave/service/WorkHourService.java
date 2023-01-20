@@ -29,24 +29,26 @@ public class WorkHourService {
         employeeLeaveRepo.save(employeeLeave);
     }
 
-    public Optional<EmployeeLeaveEntity> getEmployeeLeaveByEmployeeIdAndYearMonth(WorkHourRequest workHourRequest){
-        Optional<EmployeeLeaveEntity> result = employeeLeaveRepo.findByEmployeeId(workHourRequest.getEmployeeId())
-                .stream()
-                .filter(EmployeeLeave -> Objects.equals(EmployeeLeave.getYearMonth().intValue(),
-                        workHourRequest.getYearMonth().intValue())).findFirst();
-
-
-        return result;
-    }
-
-//    public Optional<EmployeeLeaveEntity> getEmployeeLeaveByEmployeeIdAndYearMonth(String employeeId, Number yearMonth){
-//        Optional<EmployeeLeaveEntity> result = employeeLeaveRepo.findByEmployeeId(employeeId)
+//    public Optional<EmployeeLeaveEntity> getEmployeeLeaveByEmployeeIdAndYearMonth(WorkHourRequest workHourRequest){
+//        Optional<EmployeeLeaveEntity> result = employeeLeaveRepo.findByEmployeeId(workHourRequest.getEmployeeId())
 //                .stream()
 //                .filter(EmployeeLeave -> Objects.equals(EmployeeLeave.getYearMonth().intValue(),
-//                        yearMonth.intValue())).findFirst();
+//                        workHourRequest.getYearMonth().intValue())).findFirst();
+//
 //
 //        return result;
 //    }
+
+    public Optional<EmployeeLeaveEntity> getEmployeeLeaveByEmployeeIdAndYearMonth(String employeeId, Number yearMonth){
+        Optional<EmployeeLeaveEntity> result = employeeLeaveRepo.findByEmployeeId(employeeId)
+                .stream()
+                .filter(EmployeeLeave -> Objects.equals(EmployeeLeave.getYearMonth().intValue(),
+                        yearMonth.intValue())).findFirst();
+
+        System.out.println(result);
+
+        return result;
+    }
 
     public void deleteEmployeeLeave(String id){
         this.employeeLeaveRepo.deleteById(id);
