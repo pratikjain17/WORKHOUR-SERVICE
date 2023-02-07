@@ -40,6 +40,7 @@ public class WorkHourProducer {
         LOGGER.info(String.format("Order Event => %s", result.toString()));
 
         Message<Optional<EmployeeLeaveEntity>> message = MessageBuilder.withPayload(result)
+                .setHeader(KafkaHeaders.TOPIC ,topic.name())
                 .build();
         kafkaTemplate.send(message);
     }

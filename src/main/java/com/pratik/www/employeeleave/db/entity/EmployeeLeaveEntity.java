@@ -46,6 +46,16 @@ public class EmployeeLeaveEntity {
         return count;
     }
 
+    @Override
+    public String toString() {
+        return "EmployeeLeaveEntity{" +
+                "id='" + id + '\'' +
+                ", employeeId='" + employeeId + '\'' +
+                ", yearMonth=" + yearMonth +
+                ", count=" + count +
+                '}';
+    }
+
     @JsonPOJOBuilder(withPrefix = "set")
     public static class EmployeeLeaveEntityBuilder {
 
